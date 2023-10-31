@@ -1,8 +1,8 @@
 # HotelManagementSystem
 hotel.py: main screen
-customer.py: customer management screen
-booking.py: booking management screen
-room.py: room management screen
+- customer.py: customer management screen
+- booking.py: booking management screen
+- room.py: room management screen
 
 run app:  run "python hotel.py" in terminal
 - button CUSTOMER for customer.py
