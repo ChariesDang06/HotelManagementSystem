@@ -7,6 +7,7 @@ import mysql.connector
 from time import strftime
 from datetime import datetime
 from tkcalendar import Calendar
+from widgets.button import button
 
 
 class RoomBooking:
@@ -64,14 +65,11 @@ class RoomBooking:
         )
         lblCustomerContact.grid(row=0, column=0, sticky=W)
 
-        # vcmd = (self.root.register(validate_input), '%P')
         entryContact = ttk.Entry(
             labelDetailsFrame,
             textvariable=self.varContact,
             font=("Microsoft Sans Serif", 12),
             width=17,
-            validate="key",
-            validatecommand=(self.root.register(self.validate_input), "%P"),
         )
         entryContact.grid(row=0, column=1, sticky=W)
 
@@ -133,16 +131,6 @@ class RoomBooking:
         )
         lblRoomType.grid(row=3, column=0, sticky=W)
 
-        conn = mysql.connector.connect(
-            host="localhost",
-            username="root",
-            password="130806080525",
-            database="hotelmanagementsystem",
-        )
-        myCursor = conn.cursor()
-        myCursor.execute("select room_type from room_manage")
-        roomTypeRows = myCursor.fetchall()
-
         cbbRoomType = ttk.Combobox(
             labelDetailsFrame,
             textvariable=self.varRoomType,
@@ -150,7 +138,7 @@ class RoomBooking:
             width=27,
             state="readonly",
         )
-        cbbRoomType["value"] = roomTypeRows
+        cbbRoomType["value"] = ("Single", "Duplex", "Luxury")
         cbbRoomType.current(0)
         cbbRoomType.grid(row=3, column=1)
 
@@ -318,14 +306,15 @@ class RoomBooking:
         btnFrame = Frame(labelDetailsFrame, bd=2, relief=RIDGE)
         btnFrame.place(x=0, y=420, width=412, height=40)
 
-        btnAdd = Button(
-            btnFrame,
-            text="Add",
-            command=self.AddData,
-            font=("Microsoft Sans Serif", 12),
-            bg="linen",
-            width=10,
-        )
+        # btnAdd = Button(
+        #     btnFrame,
+        #     text="Add",
+        #     command=self.AddData,
+        #     font=("Microsoft Sans Serif", 12),
+        #     bg="linen",
+        #     width=10,
+        # )
+        btnAdd = button(btnFrame, "Add", self.AddData)
         btnAdd.grid(row=0, column=0, padx=1)
 
         btnUpdate = Button(
@@ -825,10 +814,14 @@ class RoomBooking:
             mealCost = 300000
         elif self.varMeal.get().lower() == "lunch":
             mealCost = 500000
+        elif self.varMeal.get().lower() == "dinner":
+            mealCost = 700000
         if self.varRoomType.get().lower() == "single":
             roomCost = 500000
-        if self.varRoomType.get().lower() == "luxury":
+        if self.varRoomType.get().lower() == "duplex":
             roomCost = 700000
+        if self.varRoomType.get().lower() == "luxury":
+            roomCost = 900000
         self.CalculateCosts(mealCost, roomCost)
 
     # search

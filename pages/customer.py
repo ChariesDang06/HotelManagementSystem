@@ -230,7 +230,7 @@ class CustomerWindow:
             width=28,
             font=("Microsoft Sans Serif", 12),
         )
-        cbxIDProofType["value"] = ("Citizen ID", "Passport", "Other")
+        cbxIDProofType["value"] = ("CitizenID", "Passport", "Other")
         cbxIDProofType.current(0)
         cbxIDProofType.grid(row=8, column=1)
 
@@ -504,7 +504,7 @@ class CustomerWindow:
         if len(rows) != 0:
             self.CustomerDetailsTable.delete(*self.CustomerDetailsTable.get_children())
             for i in rows:
-                self.CustomerDetailsTable.insert("", END, values=i)
+                self.CustomerDetailsTable.insert("", END, text=i, values=i)
             conn.commit()
         conn.close()
 
@@ -513,7 +513,7 @@ class CustomerWindow:
     def getCursor(self, event=""):
         cursorRow = self.CustomerDetailsTable.focus()
         content = self.CustomerDetailsTable.item(cursorRow)
-        row = content["values"]
+        row = content["text"].split(" ")
 
         self.varID.set(row[0]),
         self.varFirstName.set(row[1]),

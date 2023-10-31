@@ -1,8 +1,8 @@
 from tkinter import *
 from PIL import Image, ImageTk  # pip install pillow
-from customer import CustomerWindow
-from room import RoomManage
-from booking import RoomBooking
+from pages.customer import CustomerWindow
+from pages.room import RoomManage
+from pages.booking import RoomBooking
 
 
 class HotelManagementSystem:
@@ -129,19 +129,6 @@ class HotelManagementSystem:
         lblimg1 = Label(mainFrame, image=self.photoHotel2, bd=4, relief=RIDGE)
         lblimg1.place(x=435, y=0, width=227, height=210)
         lblimg1.grid(row=2, column=0)
-
-        # ==============
-        self.test = StringVar()
-        entryContact = Entry(
-            root,
-            textvariable=self.test,
-            font=("Microsoft Sans Serif", 12),
-            width=17,
-            # validate="key",
-            # validatecommand=(self.root.register(self.validate_input), "%P"),
-        )
-        entryContact.place(x=500, y=300, width=300, height=50)
-        self.test.set("0123215")
 
     def CustomerDetails(self):
         self.newWindow = Toplevel(self.root)
