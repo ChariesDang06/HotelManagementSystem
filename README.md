@@ -1,4 +1,6 @@
 # HotelManagementSystem
+Using Tkinter to create a manangement app
+Functions: Add, Update, Delete, Reset, Search, Show Data for managing information
 hotel.py: main screen
 - customer.py: customer management screen
 - booking.py: booking management screen
